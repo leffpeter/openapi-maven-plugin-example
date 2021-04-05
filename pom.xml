@@ -25,6 +25,32 @@
         <scribejava-apis-version>6.9.0</scribejava-apis-version>
         <gen.package>com.example.openapi</gen.package>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>dependency-snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>plugin-snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -140,6 +166,21 @@
             <artifactId>jackson-datatype-threetenbp</artifactId>
             <version>2.12.2</version>
         </dependency>
+
+        <!--
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        -->
+        <!-- https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-maven-plugin -->
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-maven-plugin</artifactId>
+            <version>3.0.25</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -148,25 +189,44 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <!-- RELEASE_VERSION -->
-                <version>5.1.0</version>
-                <!-- /RELEASE_VERSION -->
                 <executions>
                     <execution>
+                        <id>generate-client</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/petstore.json</inputSpec>
-                            <!-- <generatorName>spring</generatorName> -->
-                            <generatorName>java</generatorName>
+d                            <inputSpec>${project.basedir}/src/main/resources/petstore.json</inputSpec>
+d                            <generatorName>java</generatorName>
                             <library>resttemplate</library>
-                            <!-- <apiPackage>${gen.package}.api</apiPackage> -->
-                            <!-- <modelPackage>${gen.package}.model</modelPackage> -->
-                            <!-- <invokerPackage>${gen.package}.invoker</invokerPackage> -->
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <java8>true</java8>
+                                <sourceFolder>src/main/java</sourceFolder>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        -->
+            <plugin>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-client-swagger3</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <inputSpec>${project.basedir}/src/main/resources/petstore.json</inputSpec>
+                            <language>java</language>
+                            <library>resttemplate</library>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                                 <java8>true</java8>

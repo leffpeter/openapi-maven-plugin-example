@@ -1,3 +1,3 @@
-# Openapi Generator Plugin
+# OpenApi Generator Maven Plugin Example.
 
-OpenApi generator maven plugin example.
+Simple OpenApi generator maven plugin example with PetStore api specification.

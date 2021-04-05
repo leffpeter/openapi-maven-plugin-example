@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.4</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.example.openapi</groupId>
+    <artifactId>openapi-client</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>openapi-client</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>15</java.version>
+        <springfox-version>2.8.0</springfox-version>
+        <swagger-annotations-version>1.5.8</swagger-annotations-version>
+        <jersey-version>2.27</jersey-version>
+        <jackson-version>2.12.2</jackson-version>
+        <jackson-databind-nullable-version>0.2.0</jackson-databind-nullable-version>
+        <jodatime-version>2.7</jodatime-version>
+        <maven-plugin-version>1.0.0</maven-plugin-version>
+        <junit-version>4.8.1</junit-version>
+        <scribejava-apis-version>6.9.0</scribejava-apis-version>
+        <gen.package>com.example.openapi</gen.package>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- dependencies are needed for the client being generated -->
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations-version}</version>
+        </dependency>
+
+        <!-- You can find the dependencies for the library configuration you chose by looking in JavaClientCodegen.
+             Then find the corresponding dependency on Maven Central, and set the versions in the property section below -->
+
+        <!-- HTTP client: jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+
+        <!-- @Nullable annotation -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <!-- JSON processing: jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-base</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-databind-nullable-version}</version>
+        </dependency>
+
+        <!-- Joda time: if you use it -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${jodatime-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-apis</artifactId>
+            <version>${scribejava-apis-version}</version>
+        </dependency>
+        <!-- Base64 encoding that works in both JVM and Android -->
+        <dependency>
+            <groupId>com.brsanthu</groupId>
+            <artifactId>migbase64</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.joschi.jackson/jackson-datatype-threetenbp -->
+        <dependency>
+            <groupId>com.github.joschi.jackson</groupId>
+            <artifactId>jackson-datatype-threetenbp</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <!-- RELEASE_VERSION -->
+                <version>5.1.0</version>
+                <!-- /RELEASE_VERSION -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/petstore.json</inputSpec>
+                            <!-- <generatorName>spring</generatorName> -->
+                            <generatorName>java</generatorName>
+                            <library>resttemplate</library>
+                            <!-- <apiPackage>${gen.package}.api</apiPackage> -->
+                            <!-- <modelPackage>${gen.package}.model</modelPackage> -->
+                            <!-- <invokerPackage>${gen.package}.invoker</invokerPackage> -->
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <java8>true</java8>
+                                <sourceFolder>src/main/java</sourceFolder>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

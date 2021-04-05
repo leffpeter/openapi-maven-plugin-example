@@ -1,2 +1,3 @@
-# openapi-maven-plugin-example
-OpenApi maven plugin example
+# Openapi Generator Plugin
+
+OpenApi generator maven plugin example.

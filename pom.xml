@@ -71,8 +71,8 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- OpenApi dependencies -->
         <!-- dependencies are needed for the client being generated -->
-
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
@@ -200,8 +200,6 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-d                            <inputSpec>${project.basedir}/src/main/resources/petstore.json</inputSpec>
-d                            <generatorName>java</generatorName>
                             <library>resttemplate</library>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
